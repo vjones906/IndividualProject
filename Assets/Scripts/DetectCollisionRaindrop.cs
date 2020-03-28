@@ -5,8 +5,8 @@ using UnityEngine;
 public class DetectCollisionRaindrop : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
-    //game over if the player hits an obstacle
     {
+        // Destroys the raindrops if they hit a platform before being able to hit the "out of bounds" marker
         if (collision.gameObject.CompareTag("Platform"))
         {
             Destroy(gameObject);

@@ -7,8 +7,8 @@ public class DetectCollisionPlayer : MonoBehaviour
     public bool gameOver = false;
 
     private void OnCollisionEnter(Collision collision)
-    //game over if the player hits an obstacle
     {
+        // Game over if the player hits a raindrop
         if (collision.gameObject.CompareTag("Raindrop"))
         {
             Destroy(gameObject);
