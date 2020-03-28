@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpSpeed = 8f;
     public float gravityForce = 30f;
     private Vector3 hozDir = Vector3.zero;
+    public bool gameOver = false;
 
     // Start is called before the first frame update
     void Start()

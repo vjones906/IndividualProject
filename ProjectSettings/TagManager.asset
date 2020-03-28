@@ -7,6 +7,12 @@ TagManager:
   - Left
   - Right
   - Boundary
+  - Ground
+  - Background
+  - Foreground
+  - Lantern
+  - Platform
+  - Raindrop
   layers:
   - Default
   - TransparentFX
