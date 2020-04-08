@@ -28,7 +28,7 @@ public class SpawnManager : MonoBehaviour
         // Generate random raindrop index and random spawn position
         Vector3 spawnPos = new Vector3(Random.Range(spawnLimitXLeft, spawnLimitXRight), spawnPosY, 0);
         int randomRaindrop = Random.Range(0, raindropPrefabs.Length);
-        // instantiate raindrop at random spawn location
+        // Instantiate raindrop at random spawn location
         Instantiate(raindropPrefabs[randomRaindrop], spawnPos, raindropPrefabs[randomRaindrop].transform.rotation);
     }
 
