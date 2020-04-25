@@ -11,9 +11,9 @@ public class DetectCollisionPlayer : MonoBehaviour
         // Game over if the player hits a raindrop
         if (collision.gameObject.CompareTag("Raindrop"))
         {
-            Destroy(gameObject);
             gameOver = true;
             Debug.Log("Game Over");
+
         }
     }
 }

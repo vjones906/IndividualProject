@@ -4,14 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Left
-  - Right
-  - Boundary
-  - Ground
-  - Background
-  - Foreground
-  - Lantern
   - Platform
+  - Lantern
+  - Background
+  - Ground
+  - Foreground
+  - Undefined
   - Raindrop
   layers:
   - Default
@@ -22,7 +20,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - PostProcessing
   - 
   - 
   - 

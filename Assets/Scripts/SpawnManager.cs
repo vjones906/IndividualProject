@@ -15,6 +15,9 @@ public class SpawnManager : MonoBehaviour
     private float maxSpawnInterval = 0.5f;
     private float spawnInterval;
 
+    public bool gameOver = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,4 +35,5 @@ public class SpawnManager : MonoBehaviour
         Instantiate(raindropPrefabs[randomRaindrop], spawnPos, raindropPrefabs[randomRaindrop].transform.rotation);
     }
 
+    
 }
