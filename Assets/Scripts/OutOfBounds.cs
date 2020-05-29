@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OutOfBounds : MonoBehaviour
 {
-    private float bottomLimit = 35.5f;
+    private float bottomLimit = 200f;
 
     // Update is called once per frame
     void Update()
