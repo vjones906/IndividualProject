@@ -11,6 +11,10 @@ TagManager:
   - Foreground
   - Undefined
   - Raindrop
+  - Element
+  - Obstacle
+  - ObstacleUpper
+  - ObstacleLower
   layers:
   - Default
   - TransparentFX

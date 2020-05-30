@@ -5,67 +5,84 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRigidBody;
-    private Animator playerAnim;
-    //public ParticleSystem obstacleExplosion;
-    //public ParticleSystem dirtSplat;
-    //public AudioClip jumpSound;
-   // public AudioClip explosionSound;
+    public Animator playerAnim;
+    public AudioClip jumpSound;
+    public AudioClip crashSound;
     private AudioSource audioSource;
-    //public float forceMultiplier;
-    //public float gravityMultiplier;
-    public bool onGround = true;
-    public bool gameOver = false;
+    public float gravityMultiplier;
+    public bool onGround;
+    public bool gameOver;
 
-    public float jumpSpeed = 8f;
-    private Vector3 hozDir = Vector3.zero;
+    public float jumpSpeed;
+    private Vector3 hozDir;
+
+    private EventManager eventManager;
+    public bool isActive;
 
     // Start is called before the first frame update
     void Start()
     {
+        eventManager = GameObject.Find("Event Manager").GetComponent<EventManager>();
         playerRigidBody = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-        //Physics.gravity *= gravityMultiplier;
+        Physics.gravity *= gravityMultiplier;
+
+        onGround = true;
+        gameOver = false;
+        hozDir = new Vector3(0, 0, 0);
+
+        isActive = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        playerRigidBody.AddForce(Vector3.down * gravityMultiplier);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (onGround)
             {
-                //playerRigidBody.AddForce(Vector3.up * forceMultiplier, ForceMode.Impulse);
                 onGround = false;
                 playerRigidBody.velocity = new Vector3(0, jumpSpeed, 0);
-                //dirtSplat.Stop();
                 playerAnim.SetTrigger("Jump_trig");
-                //audioSource.PlayOneShot(jumpSound, 1.0f);
+                audioSource.PlayOneShot(jumpSound, 0.75f);
             }
         }
+    }
+
+    public void Deactivate()
+    {
+        isActive = false;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         //game over if the player hits an obstacle
-        if (collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("ObstacleUpper") || collision.gameObject.CompareTag("ObstacleLower"))
         {
-            //dirtSplat.Stop();
             gameOver = true;
-            //obstacleExplosion.Play();
             Debug.Log("Game Over");
+            eventManager.gameOverEvent?.Invoke();
             playerAnim.SetBool("Death_b", true);
             playerAnim.SetInteger("DeathType_int", 1);
-            //audioSource.PlayOneShot(explosionSound, 1.0f);
+            audioSource.PlayOneShot(crashSound, 2.0f);
         }
 
         //set on ground state to true if we hit the ground
         if (collision.gameObject.CompareTag("Ground"))
         {
             onGround = true;
-            //dirtSplat.Play();
+        }
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Lantern"))
+        {
+            eventManager.targetDestroyed?.Invoke(10);
+            Destroy(collision.gameObject);
         }
     }
 }

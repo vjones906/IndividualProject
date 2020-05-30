@@ -7,7 +7,7 @@ public class MoveLeft : MonoBehaviour
     private float speed = 30;
     private PlayerController playerController;
     private float leftBoundaryBG = -1300;
-    private float leftBoundaryOB = -1300;
+    private float leftBoundaryEL = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -23,10 +23,21 @@ public class MoveLeft : MonoBehaviour
             transform.Translate(Vector3.left * Time.deltaTime * speed);
         }
 
-        if (transform.position.x < leftBoundaryOB && gameObject.CompareTag("Obstacle"))
+        if (transform.position.x < leftBoundaryEL && gameObject.CompareTag("ObstacleUpper"))
         {
             Destroy(gameObject);
         }
+
+        if (transform.position.x < leftBoundaryEL && gameObject.CompareTag("ObstacleLower"))
+        {
+            Destroy(gameObject);
+        }
+
+        if (transform.position.x < leftBoundaryEL && gameObject.CompareTag("Lantern"))
+        {
+            Destroy(gameObject);
+        }
+
         if (transform.position.x < leftBoundaryBG && gameObject.CompareTag("Background"))
         {
             Destroy(gameObject);
