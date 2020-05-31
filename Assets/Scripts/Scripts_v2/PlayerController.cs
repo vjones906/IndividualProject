@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip jumpSound;
     public AudioClip crashSound;
     private AudioSource audioSource;
-    //public float gravityMultiplier;
+    public float gravityMultiplier;
     public bool onGround;
     public bool gameOver;
 
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         playerRigidBody = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-        //Physics.gravity *= gravityMultiplier;
+        Physics.gravity *= gravityMultiplier;
 
         onGround = true;
         gameOver = false;
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerRigidBody.AddForce(Vector3.down);// * gravityMultiplier);
+        playerRigidBody.AddForce(Vector3.down);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        //collect lantern pick ups and add to the score
         if (collision.gameObject.CompareTag("Lantern"))
         {
             eventManager.targetDestroyed?.Invoke(10);
